@@ -260,11 +260,7 @@ func serviceProcess() error {
 				log.Println("I! categraf service status: unknown")
 			}
 		}
-		if err := s.Start(); err != nil {
-			log.Println("E! start categraf service failed:", err)
-		} else {
-			log.Println("I! start categraf service ok")
-		}
+		startCategrafService(s)
 		return nil
 	}
 	if *status {
