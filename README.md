@@ -28,8 +28,6 @@ https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/ca
 
 ![网卡空、版本号过长](docs/bugs/3.png)
 
-未就绪盘（光驱、空卡）仍可能显示 NaN Bytes，官方也一样，夜莺把 `Unknown` 当数字算了。
-
 ## 相对官方 v0.3.87 的改动
 
 源码在 [`categraf/`](categraf/)。
@@ -40,10 +38,6 @@ https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/ca
 | `heartbeat/network/network_windows.go` | `chcp 65001` 后再跑 `ipconfig /all` |
 | `inputs/mtail/.../reader.go` | 去掉 Go 1.21 的 `min()` |
 | 版本号 | 固定 `v0.3.87` |
-
-0.3.50 起元信息已是单块失败不影响其它块，所以这块用 0.3.87 即可，不用再改。
-
-最新 0.5.x 不能靠改 `go.mod` 降到 Go 1.20 来编，依赖已经用了 `slog` / `slices` 等。
 
 ## 安装
 
