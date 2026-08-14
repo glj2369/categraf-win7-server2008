@@ -28,6 +28,13 @@ https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/ca
 
 ![网卡空、版本号过长](docs/bugs/3.png)
 
+## 本版本特点
+
+- 能在 Win7 / 2008 R2 / 2012 上运行
+- 夜莺 9.1 能看到平台、CPU、内存、文件系统、网卡
+- 中文 Windows 网卡能解析
+- AGENT 版本是 `v0.3.87`，没有 hash
+
 ## 相对官方 v0.3.87 的改动
 
 源码在 [`categraf/`](categraf/)。
