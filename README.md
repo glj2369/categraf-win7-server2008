@@ -1,67 +1,61 @@
 # categraf-win7-server2008
 
-给 **Windows 7 / Server 2008 R2 / Server 2012** 用的 categraf 包，对接夜莺 9.1。官方新包在这些系统上起不来；能跑起来的旧包，元信息又不完整。本包把两件事一起补上。
+官方从 v0.3.46 起用 Go 1.21 出包，Win7 / Server 2008 R2 无法运行。还能跑的旧包（如 0.3.45）接到夜莺 9.1 后，元信息经常是空的。
+
+这里是官方 [v0.3.87](https://github.com/flashcatcloud/categraf/tree/v0.3.87) 源码，用 **Go 1.20.14** 编出来的 Windows 包。
+
+可用：Windows 7、Server 2008 R2、Server 2012  
+不可用：Server 2008（非 R2）
 
 ## 下载
 
-[Releases：categraf-v0.3.87-windows7-amd64.zip](https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/categraf-v0.3.87-windows7-amd64.zip)
+https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/categraf-v0.3.87-windows7-amd64.zip
 
-解压后得到 `categraf.exe` + `conf` + `scripts`。
+解压后是 `categraf.exe`、`conf`、`scripts`。
 
-**不支持**原版 Windows Server 2008（非 R2）。
+## 旧包在夜莺上的情况
 
-## 旧版本的问题
+有心跳，元信息对不上：
 
-夜莺上机器有心跳，但元信息基本不可用：
+- PLATFORM / CPU / MEMORY / NETWORK / FILESYSTEM 显示「暂无数据」
+- 中文系统解析 `ipconfig` 失败，网卡为空，严重时整份元数据都不报
+- 列表 CPU 低负载时显示 0.0%，看起来像没采到
+- AGENT 版本带着一长串 hash
 
-- PLATFORM / CPU / MEMORY / NETWORK / FILESYSTEM 经常整页「暂无数据」
-- 中文 Windows 网卡解析失败后，网卡信息出不来，严重时整份元数据都不报
-- 列表里 CPU 看起来像没采到（低负载会显示成 0.0%）
-- AGENT 版本号过长，带着一串 hash
+![元信息空](docs/bugs/1.png)
 
-![元信息全空](docs/bugs/1.png)
+![CPU 显示 0.0%](docs/bugs/2.png)
 
-![列表 CPU 显示为空](docs/bugs/2.png)
+![网卡空、版本号过长](docs/bugs/3.png)
 
-![网卡仍空、版本号过长](docs/bugs/3.png)
+未就绪盘（光驱、空卡）仍可能显示 NaN Bytes，官方也一样，夜莺把 `Unknown` 当数字算了。
 
-## 本版本解决了什么
+## 相对官方 v0.3.87 的改动
 
-- 能在 Win7 / 2008 R2 / 2012 上安装并运行
-- 元信息容错：一块采集失败不再拖垮整页，平台 / CPU / 内存 / 文件系统能正常显示
-- 中文 Windows 先切 UTF-8 再读网卡，NETWORK 能报出网卡和 IP
-- AGENT 版本固定为短号 **`v0.3.87`**
+源码在 [`categraf/`](categraf/)。
 
-个别未就绪盘（光驱、空卡）仍可能显示 NaN Bytes，夜莺前端把 `Unknown` 当数字乘，官方同样如此。
+| 文件 | 改动 |
+|---|---|
+| `go.mod` | `go 1.21` → `1.20` |
+| `heartbeat/network/network_windows.go` | `chcp 65001` 后再跑 `ipconfig /all` |
+| `inputs/mtail/.../reader.go` | 去掉 Go 1.21 的 `min()` |
+| 版本号 | 固定 `v0.3.87` |
+
+0.3.50 起元信息已是单块失败不影响其它块，所以这块用 0.3.87 即可，不用再改。
+
+最新 0.5.x 不能靠改 `go.mod` 降到 Go 1.20 来编，依赖已经用了 `slog` / `slices` 等。
 
 ## 安装
 
-先改 `conf/config.toml` 里的 `[[writers]]` 指向夜莺，再：
+改 `conf/config.toml` 的 `[[writers]]` 指向夜莺：
 
-```text
+```
 categraf.exe --install
 categraf.exe --start
 ```
 
-已有旧版时，只换 exe，保留原 `conf`：
+升级只换 exe，不要覆盖已有 `conf`。`--stop` / `--remove` / `--status` 可用。
 
-```text
-categraf.exe --stop
-:: 覆盖 categraf.exe
-categraf.exe --start
-```
+## License
 
-也可用 `--stop` / `--remove` / `--status`。`[global]` / `[[writers]]` 可沿用现有夜莺地址，不要整份拷官方新版 conf。
-
-## 源码
-
-修改后的源码在 [`categraf/`](categraf/)，基于官方 [v0.3.87](https://github.com/flashcatcloud/categraf/tree/v0.3.87)。相对官方只动了这些：
-
-- `go.mod`：语言版本改为 Go 1.20，才能在 Win7 / 2008 R2 上跑
-- `heartbeat/network/network_windows.go`：中文 Windows 先 `chcp 65001` 再读网卡
-- `inputs/mtail/internal/tailer/logstream/reader.go`：去掉 Go 1.21 才有的 `min()`，否则 1.20 编不过
-- 版本号写成短的 `v0.3.87`
-
-## 许可
-
-上游 [categraf](https://github.com/flashcatcloud/categraf) 为 MIT，见 [LICENSE](LICENSE)。
+[MIT](LICENSE)，与上游 [categraf](https://github.com/flashcatcloud/categraf) 相同。
