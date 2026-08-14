@@ -19,11 +19,11 @@
 - 列表里 CPU 看起来像没采到（低负载会显示成 0.0%）
 - AGENT 版本号过长，带着一串 hash
 
-![元信息全空](docs/bugs/01-v0.3.45-yuanxinxi-empty.png)
+![元信息全空](docs/bugs/1.png)
 
-![列表 CPU 显示为空](docs/bugs/02-v0.3.45-cpu-empty.png)
+![列表 CPU 显示为空](docs/bugs/2.png)
 
-![网卡仍空、版本号过长](docs/bugs/03-v0.3.87-network-empty-long-version.png)
+![网卡仍空、版本号过长](docs/bugs/3.png)
 
 ## 本版本解决了什么
 
