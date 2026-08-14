@@ -14,10 +14,11 @@ import (
 )
 
 type InputReader struct {
+	// atomic.Uint64 is 8-byte aligned; required on 386.
+	runCounter atomic.Uint64
 	inputName  string
 	input      inputs.Input
 	quitChan   chan struct{}
-	runCounter uint64
 	waitGroup  sync.WaitGroup
 }
 
@@ -89,7 +90,7 @@ func (r *InputReader) gatherOnce() {
 	concurrency := config.GetConcurrency()
 	concurrencyLimiter := make(chan struct{}, concurrency)
 
-	atomic.AddUint64(&r.runCounter, 1)
+	r.runCounter.Add(1)
 
 	for i := 0; i < len(instances); i++ {
 		if !instances[i].Initialized() {
@@ -105,7 +106,7 @@ func (r *InputReader) gatherOnce() {
 
 			it := ins.GetIntervalTimes()
 			if it > 0 {
-				counter := atomic.LoadUint64(&r.runCounter)
+				counter := r.runCounter.Load()
 				if counter%uint64(it) != 0 {
 					return
 				}

@@ -2,10 +2,10 @@
 # This plugin ONLY supports Linux
 # # collect interval
 # interval = 15
-[[instances]]
+# [[instances]]
 ## List of interfaces to pull metrics for
 # interface_include = ["eth0"]
-interface_include = ["ens33","ens38"]
+# interface_include = ["ens33","ens38"]
 ## List of interfaces to ignore when pulling metrics.
 # interface_exclude = ["eth1"]
 #interface_exclude = ["bond*", "br*", "cni*", "docker*", "flannel*", "lxcbr*", "lxdbr*", "tap*", "virbr*"]

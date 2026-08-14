@@ -3,8 +3,6 @@
 package ethtool
 
 import (
-	"log"
-
 	"flashcat.cloud/categraf/config"
 	"flashcat.cloud/categraf/inputs"
 	"flashcat.cloud/categraf/types"
@@ -62,8 +60,7 @@ type Instance struct {
 }
 
 func (ins *Instance) Init() error {
-	log.Println("E! Current platform is not supported")
-	return nil
+	return types.ErrInstancesEmpty
 }
 
 func (ins *Instance) Gather(slist *types.SampleList) {
