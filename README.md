@@ -20,20 +20,18 @@ https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/ca
 - PLATFORM / CPU / MEMORY / NETWORK / FILESYSTEM 显示「暂无数据」
 - 中文系统解析 `ipconfig` 失败，网卡为空，严重时整份元数据都不报
 - 列表 CPU 低负载时显示 0.0%，看起来像没采到
-- AGENT 版本带着一长串 hash
 
 ## 本版本特点
 
 - 能在 Win7 / 2008 R2 / 2012 上运行
 - 夜莺 9.1 能看到平台、CPU、内存、文件系统、网卡
 - 中文 Windows 网卡能解析
-- AGENT 版本是 `v0.3.87`，没有 hash
 
 ![元信息空](docs/bugs/1.png)
 
 ![CPU 显示 0.0%](docs/bugs/2.png)
 
-![网卡空、版本号过长](docs/bugs/3.png)
+![网卡空](docs/bugs/3.png)
 
 ## 相对官方 v0.3.87 的改动
 
@@ -44,7 +42,6 @@ https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/ca
 | `go.mod` | `go 1.21` → `1.20` |
 | `heartbeat/network/network_windows.go` | `chcp 65001` 后再跑 `ipconfig /all` |
 | `inputs/mtail/.../reader.go` | 去掉 Go 1.21 的 `min()` |
-| 版本号 | 固定 `v0.3.87` |
 
 ## 安装
 
