@@ -1,0 +1,22 @@
+# Read metrics from the bare metal servers via freeipmi
+[[instances]]
+#target="localhost"
+#user = "user"
+#pass = "1234"
+#driver = "LAN_2_0"
+#privilege = "user"
+## session-timeout, ms
+#timeout = 100000
+#collectors = [ "bmc", "ipmi", "chassis", "sel" ]
+#exclude_sensor_ids = [ 2, 29, 32, 50, 52, 55 ]
+#[instances.collector_cmd]
+#ipmi = "sudo"
+#sel = "sudo"
+
+#[instances.default_args]
+#ipmi = [ "--bridge-sensors" ]
+
+#[instances.custom_args]
+#ipmi = [ "--bridge-sensors" ]
+#sel = [ "ipmi-sel" ]
+

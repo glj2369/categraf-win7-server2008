@@ -53,6 +53,15 @@ categraf.exe --start
 
 也可用 `--stop` / `--remove` / `--status`。`[global]` / `[[writers]]` 可沿用现有夜莺地址，不要整份拷官方新版 conf。
 
+## 源码
+
+修改后的源码在 [`categraf/`](categraf/)，基于官方 [v0.3.87](https://github.com/flashcatcloud/categraf/tree/v0.3.87)。相对官方只动了这些：
+
+- `go.mod`：语言版本改为 Go 1.20，才能在 Win7 / 2008 R2 上跑
+- `heartbeat/network/network_windows.go`：中文 Windows 先 `chcp 65001` 再读网卡
+- `inputs/mtail/internal/tailer/logstream/reader.go`：去掉 Go 1.21 才有的 `min()`，否则 1.20 编不过
+- 版本号写成短的 `v0.3.87`
+
 ## 许可
 
 上游 [categraf](https://github.com/flashcatcloud/categraf) 为 MIT，见 [LICENSE](LICENSE)。

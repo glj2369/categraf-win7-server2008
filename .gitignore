@@ -1,6 +1,7 @@
 # 安装包改放到 GitHub Release，不进 git 历史
 *.exe
 release/*.zip
+categraf/logs/
 __pycache__/
 .DS_Store
 Thumbs.db

@@ -1,0 +1,13 @@
+.idea
+.DS_Store
+.vscode
+/categraf*
+*.log
+/vendor
+docker/conf
+docker/categraf
+/build
+/meta
+/nohup.out
+
+conf_local/
