@@ -29,18 +29,34 @@ var (
 	flagWinSvcStop      = flag.Bool("win-service-stop", false, "Stop windows service")
 )
 
+var serviceAgent *agent.Agent
+
+func serveWindowsSCM() bool {
+	if winsvc.IsAnInteractiveSession() {
+		return false
+	}
+	initLog("categraf.log")
+	if err := winsvc.RunAsService(*flagWinSvcName, startAgentProcess, stopWindowsService, false); err != nil {
+		log.Fatalln("F! failed to run windows service:", err)
+	}
+	return true
+}
+
+func stopWindowsService() {
+	if serviceAgent != nil {
+		serviceAgent.Stop()
+	}
+}
+
 func runAgent(ag *agent.Agent) {
+	serviceAgent = ag
 	if !winsvc.IsAnInteractiveSession() {
-		if config.Config.Log.FileName == "stdout" || config.Config.Log.FileName == "stderr" ||
-			config.Config.Log.FileName == "" {
-			initLog("categraf.log")
-		} else {
+		if config.Config.Log.FileName != "stdout" && config.Config.Log.FileName != "stderr" &&
+			config.Config.Log.FileName != "" {
 			initLog(config.Config.Log.FileName)
 		}
-
-		if err := winsvc.RunAsService(*flagWinSvcName, ag.Start, ag.Stop, false); err != nil {
-			log.Fatalln("F! failed to run windows service:", err)
-		}
+		ag.Start()
+		handleSignal(ag)
 		return
 	}
 
