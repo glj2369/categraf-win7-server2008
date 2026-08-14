@@ -9,9 +9,11 @@
 
 ## 下载
 
-https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/categraf-v0.3.87-windows7-amd64.zip
+64 位：https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/categraf-v0.3.87-windows7-amd64.zip
 
-解压后是 `categraf.exe`、`conf`、`scripts`。
+32 位：https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/categraf-v0.3.87-windows7-386.zip
+
+解压后是 `categraf.exe`、`conf`、`scripts`。按系统选包，不要混用。
 
 ## 旧包在夜莺上的情况
 
