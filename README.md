@@ -22,18 +22,18 @@ https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/ca
 - 列表 CPU 低负载时显示 0.0%，看起来像没采到
 - AGENT 版本带着一长串 hash
 
-![元信息空](docs/bugs/1.png)
-
-![CPU 显示 0.0%](docs/bugs/2.png)
-
-![网卡空、版本号过长](docs/bugs/3.png)
-
 ## 本版本特点
 
 - 能在 Win7 / 2008 R2 / 2012 上运行
 - 夜莺 9.1 能看到平台、CPU、内存、文件系统、网卡
 - 中文 Windows 网卡能解析
 - AGENT 版本是 `v0.3.87`，没有 hash
+
+![元信息空](docs/bugs/1.png)
+
+![CPU 显示 0.0%](docs/bugs/2.png)
+
+![网卡空、版本号过长](docs/bugs/3.png)
 
 ## 相对官方 v0.3.87 的改动
 
