@@ -28,7 +28,8 @@
 - 能在 Win7 / 2008 R2 / 2012 上运行（含 32 位）
 - 夜莺 9.1 能看到平台、CPU、内存、文件系统、网卡
 - 中文 Windows 网卡能解析
-- 32 位不再因 ethtool 采集 panic；服务先向 SCM 报到，冷启动超时会自动再试
+- 32 位不再因 ethtool 采集 panic
+- `--install` 后开机延迟启动
 
 ![元信息空](docs/bugs/1.png)
 
@@ -47,8 +48,7 @@
 | `inputs/mtail/.../reader.go` | 去掉 Go 1.21 的 `min()` |
 | `agent/metrics_reader.go` | 32 位 atomic 对齐 |
 | `inputs/ethtool/ethtool_notlinux.go` | 非 Linux 不启动 ethtool |
-| `agent/install/service_windows.go` | 延迟启动，失败后自动重启 |
-| `main.go` / `main_windows.go` | 用 IsWindowsService 判断，立刻 svc.Run；`--start` 遇 30 秒超时会再试 |
+| `agent/install/service_windows.go` | `--install` 后开机延迟启动 |
 
 ## 安装
 

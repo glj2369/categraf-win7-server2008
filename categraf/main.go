@@ -91,15 +91,7 @@ func main() {
 		return
 	}
 
-	// Windows 服务必须先连上 SCM，再做耗时初始化，否则会 30 秒连接超时。
-	if serveWindowsSCM() {
-		return
-	}
-
-	startAgentProcess()
-}
-
-func startAgentProcess() {
+	// init configs
 	if err := config.InitConfig(*configDir, *debugLevel, *debugMode, *testMode, *interval, *inputFilters); err != nil {
 		log.Fatalln("F! failed to init config:", err)
 	}
@@ -260,7 +252,11 @@ func serviceProcess() error {
 				log.Println("I! categraf service status: unknown")
 			}
 		}
-		startCategrafService(s)
+		if err := s.Start(); err != nil {
+			log.Println("E! start categraf service failed:", err)
+		} else {
+			log.Println("I! start categraf service ok")
+		}
 		return nil
 	}
 	if *status {

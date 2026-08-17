@@ -10,15 +10,11 @@ const (
 
 var (
 	serviceConfig = &service.Config{
-		Name:         ServiceName,
-		DisplayName:  "categraf",
-		Description:  "Opensource telemetry collector",
-		Dependencies: []string{"Tcpip"},
+		Name:        ServiceName,
+		DisplayName: "categraf",
+		Description: "Opensource telemetry collector",
 		Option: service.KeyValue{
-			"DelayedAutoStart":       true,
-			"OnFailure":              "restart",
-			"OnFailureDelayDuration": "10s",
-			"OnFailureResetPeriod":   120,
+			"DelayedAutoStart": true,
 		},
 	}
 )
