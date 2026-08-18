@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://glj2369.github.io/categraf-win7-server2008/sitemap.xml

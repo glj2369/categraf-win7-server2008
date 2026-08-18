@@ -1,5 +1,7 @@
 # categraf-win7-server2008
 
+项目页：https://glj2369.github.io/categraf-win7-server2008/
+
 官方从 v0.3.46 起用 Go 1.21 出包，Win7 / Server 2008 R2 无法运行。还能跑的旧包（如 0.3.45）接到夜莺 9.1 后，元信息经常是空的。
 
 这里是官方 [v0.3.87](https://github.com/flashcatcloud/categraf/tree/v0.3.87) 源码，用 **Go 1.20.14** 编出来的 Windows 包。

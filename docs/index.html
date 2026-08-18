@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Categraf Windows 7 / Server 2008 R2 采集包（v0.3.87）</title>
+  <meta name="description" content="官方 Categraf 从 v0.3.46 起用 Go 1.21 出包，Windows 7 与 Server 2008 R2 无法运行。本仓库提供用 Go 1.20.14 编译的 v0.3.87 Windows 32/64 位安装包，兼容夜莺 9.1。">
+  <meta name="keywords" content="categraf,Windows 7,Server 2008 R2,Server 2012,夜莺,n9e,监控采集">
+  <link rel="canonical" href="https://glj2369.github.io/categraf-win7-server2008/">
+  <meta property="og:title" content="Categraf Windows 7 / Server 2008 R2 采集包">
+  <meta property="og:description" content="Go 1.20.14 编译的 Categraf v0.3.87，可在 Win7 / 2008 R2 / 2012 上运行并接入夜莺 9.1。">
+  <meta property="og:url" content="https://glj2369.github.io/categraf-win7-server2008/">
+  <meta property="og:type" content="website">
+  <style>
+    body { font-family: "Segoe UI", "Microsoft YaHei", sans-serif; max-width: 820px; margin: 40px auto; padding: 0 20px; line-height: 1.65; color: #222; }
+    h1 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; }
+    a { color: #0969da; }
+    code { background: #f6f8fa; padding: 0.1em 0.35em; }
+    .meta { color: #555; margin-bottom: 1.5rem; }
+    ul { padding-left: 1.2rem; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Categraf for Windows 7 / Server 2008 R2",
+    "applicationCategory": "MonitoringApplication",
+    "operatingSystem": "Windows 7, Windows Server 2008 R2, Windows Server 2012",
+    "softwareVersion": "0.3.87",
+    "license": "https://opensource.org/licenses/MIT",
+    "url": "https://github.com/glj2369/categraf-win7-server2008",
+    "downloadUrl": "https://github.com/glj2369/categraf-win7-server2008/releases/tag/v0.3.87",
+    "description": "Categraf v0.3.87 Windows 构建，使用 Go 1.20.14 编译，可在 Windows 7 / Server 2008 R2 / Server 2012 上运行并接入夜莺 9.1。",
+    "author": {
+      "@type": "Person",
+      "name": "glj2369",
+      "url": "https://github.com/glj2369"
+    }
+  }
+  </script>
+</head>
+<body>
+  <h1>Categraf Windows 7 / Server 2008 R2 采集包</h1>
+  <p class="meta">基于官方 Categraf v0.3.87 源码，用 Go 1.20.14 编译，供仍在使用 Windows 7、Server 2008 R2、Server 2012 的环境接入夜莺。</p>
+
+  <p>源码与发行包：<a href="https://github.com/glj2369/categraf-win7-server2008">github.com/glj2369/categraf-win7-server2008</a></p>
+
+  <h2>为什么需要这个包</h2>
+  <p>官方从 v0.3.46 起改用 Go 1.21 出包，Windows 7 / Server 2008 R2 会报 <code>kernel32.dll not found</code> 或直接崩溃。更早的 0.3.45 虽能启动，接到夜莺 9.1 后平台、CPU、内存、网卡等元信息经常为空。</p>
+
+  <h2>支持系统</h2>
+  <ul>
+    <li>可用：Windows 7、Windows Server 2008 R2、Windows Server 2012（含 32 位）</li>
+    <li>不可用：Windows Server 2008（非 R2）</li>
+  </ul>
+
+  <h2>下载</h2>
+  <ul>
+    <li><a href="https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/categraf-v0.3.87-windows7-amd64.zip">64 位 zip</a></li>
+    <li><a href="https://github.com/glj2369/categraf-win7-server2008/releases/download/v0.3.87/categraf-v0.3.87-windows7-386.zip">32 位 zip</a></li>
+  </ul>
+
+  <h2>安装</h2>
+  <p>改 <code>conf/config.toml</code> 的 <code>[[writers]]</code> 指向夜莺后执行：</p>
+  <pre>categraf.exe --install
+categraf.exe --start</pre>
+  <p>升级不要覆盖已有 <code>conf</code>。换 exe 后执行 <code>--stop --remove --install --start</code>。</p>
+
+  <h2>相关链接</h2>
+  <ul>
+    <li>上游项目：<a href="https://github.com/flashcatcloud/categraf">flashcatcloud/categraf</a></li>
+    <li>官方不支持 Win7 / 2008 R2 的说明：<a href="https://github.com/flashcatcloud/categraf/issues/1098">issue #1098</a>、<a href="https://github.com/flashcatcloud/categraf/issues/1441">issue #1441</a></li>
+    <li>完整说明与改动列表：<a href="https://github.com/glj2369/categraf-win7-server2008#readme">仓库 README</a></li>
+  </ul>
+</body>
+</html>
